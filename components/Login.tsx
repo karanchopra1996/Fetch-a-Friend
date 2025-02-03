@@ -35,7 +35,7 @@ const Login = () => {
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/asset/images/dogs.jpg')", // Double-check your image path
+            backgroundImage: "url('/asset/images/dogs.jpg')",
           }}
         >
           {/* Dark overlay for better text contrast */}

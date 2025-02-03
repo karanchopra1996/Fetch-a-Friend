@@ -53,4 +53,4 @@ const Match = ({ matchId }: { matchId: string }) => {
   );
 };
 
-export default Match;
+export default Match; 
