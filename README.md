@@ -1,217 +1,34 @@
 
-Fetch Dogs API
+# Fetch A Friend : Dog matching web application
 
-General Information
+This is a frontend project built with React.js, Next.js, TypeScript, and Tailwind CSS. It connects to a provided backend API to fetch and display data. 
 
-Welcome to the Fetch Dogs API! This API provides access to a database of dogs available for adoption, along with location-based services to help users find the right match. The API supports authentication, filtering, and retrieving detailed information about dogs and their locations.
+## Live Demo
 
-Base URL
+[View Live Demo](https://fetch-a-friend-one.vercel.app/)
 
-https://frontend-take-home-service.fetch.com
+## Features
 
-Data Models
-Dog
+- **Server-side rendering (SSR):** Built with Next.js for optimized SEO and performance.
+- **Type-safe code:** Developed in TypeScript to help catch errors early.
+- **Responsive design:** Styled with Tailwind CSS for a modern and responsive UI.
+- **API Integration:** Connects seamlessly with a backend API to fetch and display dynamic data.
 
-{
-  "id": "string",
-  "img": "string",
-  "name": "string",
-  "age": "integer",
-  "zip_code": "string",
-  "breed": "string"
-}
 
-Location
+### API's used
+- [Read Content](https://github.com/karanchopra1996/Fetch-a-Friend/blob/master/Fetch_Dogs_API_Documentation.pdf)
 
-{
-  "zip_code": "string",
-  "latitude": "float",
-  "longitude": "float",
-  "city": "string",
-  "state": "string",
-  "county": "string"
-}
+## Getting Started
 
-Coordinates
+Follow these steps to get a local copy up and running:
 
-{
-  "lat": "float",
-  "lon": "float"
-}
+1. **Clone the repository:**
+   git clone (https://github.com/karanchopra1996/Fetch-a-Friend.git)
+   
+2. **Install dependencies:**
+   npm install
 
-Authentication
-
-Quick Summary:
-
-`` - Authenticate user and receive an auth cookie.
-
-`` - Logout user and invalidate session.
-
-Login
-
-Endpoint: POST /auth/login
-
-Request Body:
-
-{
-  "name": "string",
-  "email": "string"
-}
-
-Outcome: Returns an HttpOnly auth cookie (fetch-access-token) valid for 1 hour.
-
-Note: Requests must include credentials (credentials: 'include' for fetch).
-
-Logout
-
-Endpoint: POST /auth/logout
-
-Purpose: Ends the user session and invalidates the auth cookie.
-
-Dogs Endpoints
-
-Quick Summary:
-
-`` - Retrieve all possible dog breed names.
-
-`` - Search dogs based on breed, age, and location.
-
-`` - Fetch detailed information for specific dog IDs.
-
-`` - Match a dog for adoption from a list of provided IDs.
-
-Retrieve Dog Breeds
-
-Endpoint: GET /dogs/breeds
-
-Purpose: Retrieves an array of all possible dog breed names.
-
-Search for Dogs
-
-Endpoint: GET /dogs/search
-
-Filtering Parameters:
-
-breeds: Array of breed names.
-
-zipCodes: Array of ZIP codes.
-
-ageMin & ageMax: Minimum and maximum age filters.
-
-Additional Parameters:
-
-size: Number of results to return (default: 25).
-
-from: Cursor for pagination.
-
-sort: Sorting criteria (field:[asc|desc], sortable by breed, name, or age).
-
-Response Structure:
-
-{
-  "resultIds": ["dogId1", "dogId2", ...],
-  "total": 100,
-  "next": "query_for_next_page",
-  "prev": "query_for_previous_page"
-}
-
-Limit: Maximum of 10,000 matches per query.
-
-Fetch Dog Details
-
-Endpoint: POST /dogs
-
-Purpose: Fetches detailed information for a list of dog IDs.
-
-Request Body:
-
-["dogId1", "dogId2", "dogId3"]
-
-Response: Array of dog objects matching the provided IDs.
-
-Match a Dog for Adoption
-
-Endpoint: POST /dogs/match
-
-Purpose: Selects a single dog ID from a provided list to represent an adoption match.
-
-Request Body:
-
-["dogId1", "dogId2", "dogId3"]
-
-Response:
-
-{
-  "match": "dogId_selected"
-}
-
-Locations Endpoints
-
-Quick Summary:
-
-`` - Fetch detailed location information for given ZIP codes.
-
-`` - Search locations based on city, state, or geographic bounding box.
-
-Fetch Location Details
-
-Endpoint: POST /locations
-
-Purpose: Fetches detailed location information for provided ZIP codes.
-
-Request Body:
-
-["zipCode1", "zipCode2"]
-
-Response: Array of Location objects.
-
-Search Locations
-
-Endpoint: POST /locations/search
-
-Filtering Parameters:
-
-city: Full or partial city name.
-
-states: Array of two-letter state/territory abbreviations.
-
-geoBoundingBox: Defines a geographic bounding box using either:
-
-top, left, bottom, right
-
-bottom_left, top_right (or bottom_right, top_left)
-
-Each coordinate must include lat and lon.
-
-Additional Parameters:
-
-size: Number of results to return (default: 25).
-
-from: Cursor for pagination.
-
-Response Structure:
-
-{
-  "results": [
-    {
-      "zip_code": "90210",
-      "latitude": 34.0901,
-      "longitude": -118.4065,
-      "city": "Beverly Hills",
-      "state": "CA",
-      "county": "Los Angeles"
-    }
-  ],
-  "total": 5000
-}
-
-Limit: Maximum of 10,000 ZIP code matches per query.
-
-Usage Notes
-
-Authenticate using the login endpoint before making requests.
-
-Use pagination for large result sets.
-
-Include credentials: 'include' in fetch requests to maintain the session.
-
+3. **Run the development server:**
+   npm run dev
+4. **Open your browser:**
+   Visit http://localhost:3000 to see the application in action / You can have a look at the application using the Demo link mentioned above.
