@@ -29,19 +29,8 @@ const Login = () => {
         <title>Fetch a Friend</title>
       </Head>
 
-      {/* Full-screen background container */}
-      <div className="min-h-screen relative">
-        {/* Background image with overlay */}
-        <div 
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/asset/images/dogs.jpg')",
-          }}
-        >
-          {/* Dark overlay for better text contrast */}
-          <div className="absolute inset-0 bg-black/30" />
-        </div>
-
+      {/* Full-screen background container with a black background */}
+      <div className="min-h-screen relative bg-black">
         {/* Content container */}
         <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-4">
           {/* Title */}
@@ -78,7 +67,7 @@ const Login = () => {
               onClick={handleLogin}
               className="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 transform hover:scale-[1.02]"
             >
-              Let's Find Friends! 🐾
+              Let&apos;s Find Friends! 🐾
             </button>
           </div>
         </div>

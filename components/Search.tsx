@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import Logout from '../components/Logout'; // Adjust the import path if needed
 
 interface Dog {
@@ -43,7 +42,6 @@ const Search = () => {
   // We no longer filter by location so we don't need zipCodesFilter.
   // Instead, when dogs are fetched, we derive their ZIP codes to fetch location info.
   const pageSize = 25;
-  const router = useRouter();
 
   // --------------------------------------------
   // Fetch data on mount
@@ -52,27 +50,8 @@ const Search = () => {
     fetchBreeds();
   }, []);
 
-  // Re-fetch dogs whenever filters or pagination changes
-  useEffect(() => {
-    fetchDogs();
-  }, [selectedBreed, sortOrder, currentPage]);
-
-  // --------------------------------------------
-  // API Calls
-  // --------------------------------------------
-  const fetchBreeds = async () => {
-    try {
-      const response = await axios.get(
-        'https://frontend-take-home-service.fetch.com/dogs/breeds',
-        { withCredentials: true }
-      );
-      setBreeds(response.data);
-    } catch (error) {
-      console.error('Failed to fetch breeds:', error);
-    }
-  };
-
-  const fetchDogs = async () => {
+  // Wrap fetchDogs in useCallback to memoize it
+  const fetchDogs = useCallback(async () => {
     try {
       const response = await axios.get(
         'https://frontend-take-home-service.fetch.com/dogs/search',
@@ -103,6 +82,25 @@ const Search = () => {
       await fetchLocationsForZips(uniqueZips);
     } catch (error) {
       console.error('Failed to fetch dogs:', error);
+    }
+  }, [selectedBreed, sortOrder, currentPage]);
+
+  useEffect(() => {
+    fetchDogs();
+  }, [fetchDogs]);
+
+  // --------------------------------------------
+  // API Calls
+  // --------------------------------------------
+  const fetchBreeds = async () => {
+    try {
+      const response = await axios.get(
+        'https://frontend-take-home-service.fetch.com/dogs/breeds',
+        { withCredentials: true }
+      );
+      setBreeds(response.data);
+    } catch (error) {
+      console.error('Failed to fetch breeds:', error);
     }
   };
 
@@ -196,7 +194,7 @@ const Search = () => {
   const isSingleBreedSelected = !!selectedBreed;
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       {/* FAVORITES PANEL */}
       <div
         className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg p-4 z-50 transform transition-transform ${
@@ -353,7 +351,7 @@ const Search = () => {
                     alt={dog.name}
                     className="w-full h-48 object-cover"
                   />
-                  <div className="p-4">
+                  <div className="p-4 bg-white">
                     <h3 className="text-xl font-semibold mb-2">{dog.name}</h3>
                     <p>
                       <strong>Breed:</strong> {dog.breed}

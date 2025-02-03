@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 interface Dog {
   id: string;
@@ -37,7 +38,15 @@ const Match = ({ matchId }: { matchId: string }) => {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Your Match</h1>
       <div className="border p-4 rounded">
-        <img src={dog.img} alt={dog.name} className="w-full h-48 object-cover mb-2" />
+        <div className="relative w-full h-48 mb-2">
+          <Image
+            src={dog.img}
+            alt={dog.name}
+            layout="fill"
+            objectFit="cover"
+            unoptimized
+          />
+        </div>
         <h2 className="text-xl font-semibold">{dog.name}</h2>
         <p>Breed: {dog.breed}</p>
         <p>Age: {dog.age}</p>
@@ -53,4 +62,4 @@ const Match = ({ matchId }: { matchId: string }) => {
   );
 };
 
-export default Match; 
+export default Match;
