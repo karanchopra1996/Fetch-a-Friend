@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import Logout from '../components/Logout'; // Adjust the import path if needed
+import Logout from '../components/Logout'; 
 
 interface Dog {
   id: string;
@@ -36,11 +36,9 @@ const Search = () => {
   const [match, setMatch] = useState<Dog | null>(null);
   const [showFavorites, setShowFavorites] = useState(false);
 
-  // We still use zipToLocation mapping to display city and state info for each dog.
+  // We use zipToLocation mapping to display city and state info for each dog.
   const [zipToLocation, setZipToLocation] = useState<Record<string, Location>>({});
 
-  // We no longer filter by location so we don't need zipCodesFilter.
-  // Instead, when dogs are fetched, we derive their ZIP codes to fetch location info.
   const pageSize = 25;
 
   // --------------------------------------------
