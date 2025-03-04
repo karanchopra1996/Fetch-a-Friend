@@ -3,6 +3,9 @@
 
 This is a frontend project built with React.js, Next.js, TypeScript, and Tailwind CSS. It connects to a provided backend API to fetch and display data. 
 
+The main "Search Dogs" page of the Fetch A Friend web application, at the top, there’s a dropdown to select a dog breed and another dropdown to set the sort order. Users can view how many favorites they have saved, generate a random match (“Generate Match”), or log out via the red “Logout” button.
+Below that, the interface displays a grid of dog cards. Each card shows a dog’s name, breed, age, zip code, and location. There’s also a green “Add Favorite” button for saving a particular dog to the user’s favorite list. This layout provides a user-friendly way to filter, sort, and favorite dogs for prospective adoption or matching.
+
 ## Live Demo
 
 [View Live Demo](https://fetch-a-friend-one.vercel.app/)
